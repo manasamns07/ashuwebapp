@@ -6,11 +6,25 @@
 trigger:
 - main
 
-pool: MyPool
+pool: ubuntu-latest
 
 variables:
   buildConfiguration: 'Release'
 
 steps:
+
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+  
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'Free Trial(bf0c5b36-e4c6-4b4a-a7a7-6758a5fe3a05)'
+    subscriptionId: 'bf0c5b36-e4c6-4b4a-a7a7-6758a5fe3a05'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'ashuwebapp'
+    location: 'Jio India Central'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://github.com/manasamns07/ashuwebapp/blob/main/template.json'
+    csmParametersFileLink: 'https://github.com/manasamns07/ashuwebapp/blob/main/parameters.json'
+    deploymentMode: 'Incremental'
