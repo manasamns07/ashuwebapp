@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sites_manuwebapp_name": {
+            "value": null
+        },
+        "components_manuwebapp_name": {
+            "value": null
+        },
+        "serverfarms_ASP_manuwebapp_922d_name": {
+            "value": null
+        },
+        "actionGroups_Application_Insights_Smart_Detection_name": {
+            "value": null
+        },
+        "smartdetectoralertrules_failure_anomalies___ashuwebapp_name": {
+            "value": null
+        },
+        "workspaces_DefaultWorkspace_bf0c5b36_e4c6_4b4a_a7a7_6758a5fe3a05_CUS_externalid": {
+            "value": null
+        }
+    }
+}
