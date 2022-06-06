@@ -28,3 +28,8 @@ steps:
     csmFileLink: 'https://github.com/manasamns07/ashuwebapp/blob/main/template.json'
     csmParametersFileLink: 'https://github.com/manasamns07/ashuwebapp/blob/main/parameters.json'
     deploymentMode: 'Incremental'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'drop'
+    publishLocation: 'pipeline'
