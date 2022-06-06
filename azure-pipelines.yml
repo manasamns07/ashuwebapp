@@ -1,0 +1,37 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- main
+
+pool:
+
+  vmImage: ubuntu-latest
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
+
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'Visual Studio for Manasa'
+    subscriptionId: '209808a9-6c10-4ced-8679-47ac84f97d68'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'manasatest'
+    location: 'Central US'
+    templateLocation: 'URL of the file'
+    csmFileLink: 'https://github.com/manasamns07/ashuwebapp/blob/main/template.json'
+    csmParametersFileLink: 'https://github.com/manasamns07/ashuwebapp/blob/main/parameters.json'
+    deploymentMode: 'Incremental'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
